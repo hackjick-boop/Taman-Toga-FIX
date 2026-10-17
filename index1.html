@@ -1,0 +1,2031 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taman TOGA Ambarawa Asri RT.06 RW.12 - Hijau, Sehat & Asri</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        toga: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            dark: '#0a2e18'
+                        },
+                        amber: {
+                            warm: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js CDN for 3D Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- OrbitControls for 3D interaction -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(34, 197, 94, 0.15);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #15803d 0%, #16a34a 50%, #854d0e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 9999px;
+        }
+        #hero-3d-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            outline: none;
+            cursor: grab;
+        }
+        #hero-3d-canvas:active {
+            cursor: grabbing;
+        }
+        .pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.03); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased custom-scrollbar">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-header border-b border-toga-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo & Brand -->
+                <a href="#beranda" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-toga-500 to-toga-700 flex items-center justify-center text-white shadow-lg shadow-toga-500/30 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-bold fa-leaf text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-xl font-extrabold tracking-tight text-toga-900 leading-none">TAMAN TOGA</span>
+                        <span class="text-xs font-semibold text-toga-600 tracking-wider uppercase">Ambarawa Asri RT 06 / RW 12</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <a href="#beranda" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Beranda</a>
+                    <a href="#katalog" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Katalog Tanaman</a>
+                    <a href="#denah-3d" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Denah & 3D</a>
+                    <a href="#resep" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Resep Herbal</a>
+                    <a href="#kegiatan" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Kegiatan</a>
+                    <a href="#galeri" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Galeri Foto</a>
+                    <a href="#kontak" class="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-toga-600 hover:bg-toga-50 rounded-xl transition">Kontak</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div class="hidden md:flex items-center gap-3">
+                    <a href="#katalog" class="px-5 py-2.5 rounded-xl bg-toga-600 hover:bg-toga-700 text-white font-semibold text-sm shadow-md shadow-toga-600/30 hover:shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Cari Herbal</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl text-slate-700 hover:bg-toga-100 transition focus:outline-none" aria-label="Buka Menu">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 bg-white/95 backdrop-blur-md px-4 pt-2 pb-6 space-y-2">
+            <a href="#beranda" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Beranda</a>
+            <a href="#katalog" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Katalog Tanaman</a>
+            <a href="#denah-3d" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Denah 3D Interaktif</a>
+            <a href="#resep" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Resep Jamu Herbal</a>
+            <a href="#kegiatan" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Kegiatan RT 06</a>
+            <a href="#galeri" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Galeri Foto</a>
+            <a href="#kontak" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-slate-800 font-semibold hover:bg-toga-50 hover:text-toga-600">Lokasi & Kontak</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-toga-50 via-white to-slate-50">
+        <!-- Decorative Ambient Lights -->
+        <div class="absolute top-1/4 left-10 w-96 h-96 bg-toga-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-80 h-80 bg-amber-200/40 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Text & CTA -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-toga-100/80 border border-toga-200 text-toga-800 text-xs sm:text-sm font-semibold tracking-wide shadow-sm">
+                        <span class="w-2.5 h-2.5 rounded-full bg-toga-500 animate-ping"></span>
+                        <i class="fa-solid fa-seedling text-toga-600"></i>
+                        <span>Inisiatif Lingkungan RT 06 RW 12 Perumahan Ambarawa Asri</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15]">
+                        Harmoni Alam & <span class="text-gradient">Apotek Hidup</span> Keluarga Kita
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Selamat datang di **Taman TOGA Ambarawa Asri RT.06 RW.12**. Pusat edukasi tanaman obat herbal, ruang hijau komunitas, dan sumber kesehatan alami bagi seluruh warga masyarakat.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#katalog" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-gradient-to-r from-toga-600 to-toga-700 hover:from-toga-700 hover:to-toga-800 text-white font-bold text-base shadow-xl shadow-toga-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                            <span>Jelajahi Tanaman TOGA</span>
+                        </a>
+                        <a href="#denah-3d" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-slate-100 text-toga-900 font-bold text-base border border-slate-200 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-cube text-toga-600"></i>
+                            <span>Tur Denah 3D</span>
+                        </a>
+                    </div>
+
+                    <!-- Highlighted Stats -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200/80 max-w-xl mx-auto lg:mx-0">
+                        <div class="p-3 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-sm text-center lg:text-left">
+                            <div class="text-2xl sm:text-3xl font-black text-toga-700">30+</div>
+                            <div class="text-xs text-slate-500 font-medium">Spesies Herbal</div>
+                        </div>
+                        <div class="p-3 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-sm text-center lg:text-left">
+                            <div class="text-2xl sm:text-3xl font-black text-toga-700">4 Utama</div>
+                            <div class="text-xs text-slate-500 font-medium">Zona Tanaman</div>
+                        </div>
+                        <div class="p-3 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-100 shadow-sm text-center lg:text-left">
+                            <div class="text-2xl sm:text-3xl font-black text-toga-700">100%</div>
+                            <div class="text-xs text-slate-500 font-medium">Pupuk Organik</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3D Interactive Viewer Canvas Container -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative w-full aspect-square max-w-md mx-auto lg:max-w-none rounded-3xl bg-gradient-to-b from-toga-900 to-toga-dark p-2 shadow-2xl shadow-toga-900/40 border border-toga-700 overflow-hidden group">
+                        
+                        <!-- 3D Render Canvas -->
+                        <canvas id="hero-3d-canvas" class="w-full h-full rounded-2xl"></canvas>
+
+                        <!-- Canvas Overlay Hints & Controls -->
+                        <div class="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                            <span class="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-xs font-semibold flex items-center gap-1.5 border border-white/20">
+                                <i class="fa-solid fa-arrows-spin text-toga-400 animate-spin"></i>
+                                Model 3D Interaktif
+                            </span>
+                            <span class="px-2.5 py-1 rounded-full bg-toga-500/80 backdrop-blur-md text-white text-xs font-semibold">
+                                RT 06 RW 12
+                            </span>
+                        </div>
+
+                        <!-- 3D Interactive Hint -->
+                        <div class="absolute bottom-4 left-4 right-4 bg-slate-900/80 backdrop-blur-md p-3 rounded-xl border border-white/10 text-white flex items-center justify-between pointer-events-auto">
+                            <div class="flex items-center gap-2 text-xs">
+                                <i class="fa-solid fa-hand-pointer text-toga-400 text-base"></i>
+                                <span>Putar & Putar Model 3D dengan Mouse / Sentuhan</span>
+                            </div>
+                            <button id="reset-3d-btn" class="px-2.5 py-1 text-xs bg-toga-600 hover:bg-toga-500 rounded-lg text-white font-medium transition">
+                                Reset View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="katalog" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-toga-600 font-bold uppercase tracking-wider text-xs sm:text-sm bg-toga-50 px-4 py-1.5 rounded-full border border-toga-200">
+                    Koleksi Tanaman Obat RT.06 RW.12
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                    Katalog Apotek Hidup Ambarawa Asri
+                </h2>
+                <p class="text-slate-600 mt-3 text-base sm:text-lg">
+                    Cari khasiat, nama latin, dan petunjuk penggunaan herbal alami yang tumbuh segar di taman lingkungan kita.
+                </p>
+            </div>
+
+            <!-- Search & Category Filters -->
+            <div class="mb-10 space-y-4">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <!-- Search Input -->
+                    <div class="relative w-full sm:w-96">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="plant-search" placeholder="Cari tanaman (ex: Jahe, Kunyit, Sirih)..." class="w-full pl-11 pr-4 py-3 bg-white rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-toga-500 text-sm shadow-sm transition">
+                    </div>
+
+                    <!-- Category Buttons -->
+                    <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto" id="category-filters">
+                        <button class="cat-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-toga-600 text-white shadow-sm transition" data-cat="all">Semua</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="rimpang">Rimpang / Akar</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="daun">Daun & Herba</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="bunga">Bunga & Buah</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plant Cards Grid -->
+            <div id="plant-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Plant cards generated dynamically via JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Garden Map & 3D Layout Section -->
+    <section id="denah-3d" class="py-20 bg-slate-900 text-white relative overflow-hidden">
+        <!-- Background Lighting -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-toga-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-toga-400 font-bold uppercase tracking-wider text-xs sm:text-sm bg-toga-950 px-4 py-1.5 rounded-full border border-toga-800 flex items-center justify-center gap-2 w-max mx-auto">
+                    <i class="fa-solid fa-map-location-dot text-toga-400"></i>
+                    Denah 3D & Google Maps Lokasi
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">
+                    Denah Interaktif & Peta Google Maps Taman TOGA
+                </h2>
+                <p class="text-slate-400 mt-3 text-base sm:text-lg">
+                    Jelajahi denah pembagian zona tanaman obat 3D serta lokasi Google Maps presisi Perumahan Ambarawa Asri RT.06 RW.12.
+                </p>
+            </div>
+
+            <!-- View Switcher Tabs -->
+            <div class="flex justify-center mb-10">
+                <div class="inline-flex p-1.5 bg-slate-800/90 border border-slate-700 rounded-2xl gap-2 shadow-inner">
+                    <button id="tab-btn-denah" onclick="switchMapTab('denah')" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-toga-600 text-white shadow-md">
+                        <i class="fa-solid fa-sitemap"></i>
+                        <span>Denah & Zona Taman 3D</span>
+                    </button>
+                    <button id="tab-btn-lokasi" onclick="switchMapTab('lokasi')" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-700">
+                        <i class="fa-solid fa-map-location-dot text-toga-400"></i>
+                        <span>Google Maps Lokasi Presisi</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab 1: Interactive SVG Garden Map Grid -->
+            <div id="map-tab-denah" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- SVG Garden Layout Visualizer -->
+                <div class="lg:col-span-7 bg-slate-800/80 backdrop-blur-xl p-6 rounded-3xl border border-slate-700 shadow-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-toga-400 text-xl"></i>
+                            <span class="font-bold text-sm tracking-wide">PETA RT.06 RW.12</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="switchMapTab('lokasi')" class="text-xs text-toga-400 hover:text-toga-300 bg-slate-900 hover:bg-slate-950 px-3 py-1 rounded-full border border-toga-800 transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-toga-400"></i>
+                                <span>Lihat di Google Maps</span>
+                            </button>
+                            <span class="text-xs text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-700">Area : 13 m²</span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Map graphic -->
+                    <div class="relative aspect-[4/3] bg-slate-950 rounded-2xl overflow-hidden p-4 border border-slate-800 flex items-center justify-center">
+                        <svg viewBox="0 0 800 600" class="w-full h-full">
+                            <!-- Outer Path Garden -->
+                            <rect x="20" y="20" width="760" height="560" rx="20" fill="#0f172a" stroke="#334155" stroke-width="4"/>
+                            
+                            <!-- Walkway Paths -->
+                            <path d="M 400 20 L 400 580 M 20 300 L 780 300" stroke="#475569" stroke-width="24" stroke-linecap="round" stroke-dasharray="8 8"/>
+
+                            <!-- Gazebo Center -->
+                            <circle cx="400" cy="300" r="60" fill="#1e293b" stroke="#22c55e" stroke-width="4" class="transition cursor-pointer hover:scale-105" onclick="selectZone('gazebo')"/>
+                            <text x="400" y="305" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="bold">Saung RT 06</text>
+
+                            <!-- Zone A: Rimpang -->
+                            <g class="zone-group cursor-pointer hover:opacity-90 transition" onclick="selectZone('rimpang')">
+                                <rect x="50" y="50" width="310" height="220" rx="16" fill="#14532d" fill-opacity="0.6" stroke="#22c55e" stroke-width="3"/>
+                                <text x="205" y="145" text-anchor="middle" fill="#86efac" font-size="18" font-weight="bold">ZONA A: RIMPANG</text>
+                                <text x="205" y="170" text-anchor="middle" fill="#cbd5e1" font-size="12">Jahe, Kunyit, Temulawak, Kencur</text>
+                            </g>
+
+                            <!-- Zone B: Daun Obat -->
+                            <g class="zone-group cursor-pointer hover:opacity-90 transition" onclick="selectZone('daun')">
+                                <rect x="440" y="50" width="310" height="220" rx="16" fill="#065f46" fill-opacity="0.6" stroke="#10b981" stroke-width="3"/>
+                                <text x="595" y="145" text-anchor="middle" fill="#a7f3d0" font-size="18" font-weight="bold">ZONA B: DAUN OBAT</text>
+                                <text x="595" y="170" text-anchor="middle" fill="#cbd5e1" font-size="12">Sirih, Lidah Buaya, Mint, Kumis Kucing</text>
+                            </g>
+
+                            <!-- Zone C: Persemaian & Kompos -->
+                            <g class="zone-group cursor-pointer hover:opacity-90 transition" onclick="selectZone('kompos')">
+                                <rect x="50" y="330" width="310" height="220" rx="16" fill="#78350f" fill-opacity="0.5" stroke="#f59e0b" stroke-width="3"/>
+                                <text x="205" y="425" text-anchor="middle" fill="#fde68a" font-size="18" font-weight="bold">ZONA C: KOMPOS & BIBIT</text>
+                                <text x="205" y="450" text-anchor="middle" fill="#cbd5e1" font-size="12">Rumah Kompos & Persemaian Bibit</text>
+                            </g>
+
+                            <!-- Zone D: Buah & Bunga -->
+                            <g class="zone-group cursor-pointer hover:opacity-90 transition" onclick="selectZone('bunga')">
+                                <rect x="440" y="330" width="310" height="220" rx="16" fill="#831843" fill-opacity="0.5" stroke="#ec4899" stroke-width="3"/>
+                                <text x="595" y="425" text-anchor="middle" fill="#fbcfe8" font-size="18" font-weight="bold">ZONA D: BUNGA & BUAH</text>
+                                <text x="595" y="450" text-anchor="middle" fill="#cbd5e1" font-size="12">Rosella, Mahkota Dewa, Jeruk Nipis</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Zone Details Display Card -->
+                <div class="lg:col-span-5">
+                    <div id="zone-info-card" class="bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-xl space-y-6">
+                        <div class="inline-block px-3 py-1 bg-toga-500/20 border border-toga-500/30 text-toga-400 text-xs font-bold rounded-lg uppercase tracking-wider" id="zone-badge">
+                            PILIH ZONA PADA PETA
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white" id="zone-title">
+                            Eksplorasi Taman TOGA RT.06
+                        </h3>
+
+                        <p class="text-slate-300 text-sm leading-relaxed" id="zone-desc">
+                            Klik salah satu bagian zona pada peta denah di samping untuk melihat daftar tanaman, penanggung jawab zona, serta kegunaan area tersebut.
+                        </p>
+
+                        <div id="zone-details-list" class="space-y-3 pt-4 border-t border-slate-700">
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-circle-check text-toga-400"></i>
+                                <span>Penyiraman otomatis berbasis resapan hujan</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-circle-check text-toga-400"></i>
+                                <span>Plang nama tanaman ber-QR Code informasi</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-sm text-slate-300">
+                                <i class="fa-solid fa-circle-check text-toga-400"></i>
+                                <span>Dikelola bergantian oleh Dasawisma RT 06</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-700">
+                            <button onclick="switchMapTab('lokasi')" class="w-full py-3 px-4 rounded-xl bg-toga-600 hover:bg-toga-500 text-white font-bold text-xs transition text-center flex items-center justify-center gap-2 shadow-lg shadow-toga-600/30">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                <span>Buka Peta Google Maps Lokasi Taman</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Tab 2: Location Google Maps Grid -->
+            <div id="map-tab-lokasi" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Google Maps Embed Frame Container -->
+                <div class="lg:col-span-7 bg-slate-800/80 backdrop-blur-xl p-4 sm:p-6 rounded-3xl border border-slate-700 shadow-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-toga-400 text-xl"></i>
+                            <span class="font-bold text-sm tracking-wide">PETA GOOGLE MAPS LOKASI PRESISI</span>
+                        </div>
+                        <span class="text-xs text-toga-400 bg-toga-950 px-3 py-1 rounded-full border border-toga-800/80 flex items-center gap-1.5 font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-toga-500 animate-pulse"></span> Perumahan Ambarawa Asri
+                        </span>
+                    </div>
+
+                    <!-- Map Controls Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-3 bg-slate-900/90 p-2.5 rounded-xl border border-slate-700 text-xs">
+                        <div class="flex items-center gap-2">
+                            <button onclick="changeMapEmbed('standard')" id="btn-map-std" class="px-3 py-1.5 rounded-lg bg-toga-600 text-white font-semibold transition">Peta Jalan</button>
+                            <button onclick="changeMapEmbed('satellite')" id="btn-map-sat" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold transition">Satelit / Hibrid</button>
+                        </div>
+                        <button onclick="copyLocationCoords()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-toga-400 font-semibold transition flex items-center gap-1.5">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Salin Koordinat</span>
+                        </button>
+                    </div>
+
+                    <!-- Map Frame -->
+                    <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-slate-700 shadow-inner bg-slate-950">
+                        <iframe 
+                            id="gmap-iframe"
+                            src="https://www.google.com/maps/place/Taman+Toga+rt.06%2Frw.12+Ambarawa+Asri/@-7.2461469,110.417353,54m/data=!3m1!1e3!4m6!3m5!1s0x2e7081005de0939b:0x14dcafe0c2fdb82!8m2!3d-7.246105!4d110.417267!16s%2Fg%2F11zf1gfpq9?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" 
+                            class="w-full h-full border-0" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Lokasi Presisi Perumahan Ambarawa Asri RT.06 RW.12">
+                        </iframe>
+                    </div>
+
+                    <!-- Location Chips -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3 text-[11px]">
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-700 text-center">
+                            <span class="block text-slate-400 font-medium">Plus Code</span>
+                            <strong class="text-toga-300">QC3C+837 Bawen</strong>
+                        </div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-700 text-center">
+                            <span class="block text-slate-400 font-medium">Koordinat GPS</span>
+                            <strong class="text-toga-300">-7.245953, 110.417232</strong>
+                        </div>
+                        <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-700 text-center col-span-2 sm:col-span-1">
+                            <span class="block text-slate-400 font-medium">Akses Tol</span>
+                            <strong class="text-amber-400">5 Menit Exit Bawen</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Info Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-xl space-y-6">
+                        <div class="inline-block px-3 py-1 bg-toga-500/20 border border-toga-500/30 text-toga-400 text-xs font-bold rounded-lg uppercase tracking-wider">
+                            PETA LOKASI PRESISI
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white">
+                            Taman TOGA RT.06 RW.12 Ambarawa Asri
+                        </h3>
+
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            Akses sangat strategis di Perumahan Ambarawa Asri, dekat dengan perbatasan Ambarawa & Bawen. Dilengkapi fasilitas area parkir pengunjung, akses jalan paving lebar, serta Saung Edukasi Warga.
+                        </p>
+
+                        <div class="space-y-4 pt-2 border-t border-slate-700 text-sm text-slate-300">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-map-pin text-toga-400 mt-1 text-base"></i>
+                                <div>
+                                    <strong class="block text-white text-xs uppercase tracking-wider">Alamat Lengkap Presisi</strong>
+                                    <span class="text-xs text-slate-300">Area Fasum RT.06 / RW.12, Perumahan Ambarawa Asri, Jl. Kartini, Kel. Bawen, Kec. Bawen / Ambarawa, Kab. Semarang, Jawa Tengah 50661</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-route text-toga-400 mt-1 text-base"></i>
+                                <div>
+                                    <strong class="block text-white text-xs uppercase tracking-wider">Patokan & Landmark Terdekat</strong>
+                                    <span class="text-xs text-slate-400">Masuk dari Jl. Kartini Bawen (arah Ambarawa/Bandungan), 5 menit dari GT Bawen / Terminal Bawen.</span>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-square-parking text-toga-400 mt-1 text-base"></i>
+                                <div>
+                                    <strong class="block text-white text-xs uppercase tracking-wider">Aksesibilitas & Parkir</strong>
+                                    <span class="text-xs text-slate-400">Jalan perumahan lebar, ramah untuk mobil, motor, dan rombongan bus sedang.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-700 flex flex-col sm:flex-row gap-3">
+                            <a href="https://www.google.com/maps/place/Taman+Toga+rt.06%2Frw.12+Ambarawa+Asri/@-7.2461383,110.4173416,64m/data=!3m1!1e3!4m6!3m5!1s0x2e7081005de0939b:0x14dcafe0c2fdb82!8m2!3d-7.246105!4d110.417267!16s%2Fg%2F11zf1gfpq9?hl=en-US&entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                <span>Buka Google Maps</span>
+                            </a>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=Perumahan+Ambarawa+Asri,+Bawen,+Semarang" target="_blank" rel="noopener noreferrer" class="flex-1 py-3 px-4 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold text-xs transition text-center flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-compass text-toga-400"></i>
+                                <span>Petunjuk Arah (Navigasi)</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Herbal Recipe & Jamu Section -->
+    <section id="resep" class="py-20 bg-toga-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-toga-700 font-bold uppercase tracking-wider text-xs sm:text-sm bg-toga-100 px-4 py-1.5 rounded-full border border-toga-300">
+                    Resep & Warisan Herbal Warga
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                    Olahan Herbal Alami RT.06 RW.12
+                </h2>
+                <p class="text-slate-600 mt-3 text-base sm:text-lg">
+                    Resep racikan jamu tradisional yang dapat dibuat mandiri di rumah dari hasil panen Taman TOGA.
+                </p>
+            </div>
+
+            <!-- Recipe Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Recipe Card 1 -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-3 py-1 rounded-full">Kebugaran Tubuh</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-3">Wedang Jahe Merah Sereh</h3>
+                        <p class="text-xs text-slate-500 italic mt-1">Menggunakan Jahe Merah & Batang Serai Segar</p>
+                        
+                        <div class="mt-4 space-y-2 text-sm text-slate-600">
+                            <div class="font-semibold text-slate-800">Bahan Utama:</div>
+                            <ul class="list-disc list-inside space-y-1 text-xs">
+                                2 rimpang Jahe Merah (geprak)
+                                2 batang Serai (memarkan)
+                                1 lembar Daun Pandan
+                                Gula Jawa / Madu murni secukupnya
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="openRecipeModal('wedang-jahe')" class="w-full py-2.5 rounded-xl bg-toga-50 hover:bg-toga-100 text-toga-800 font-semibold text-xs transition flex items-center justify-center gap-2">
+                            <span>Lihat Cara Pembuatan</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 2 -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-glass-water"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-toga-600 bg-toga-50 px-3 py-1 rounded-full">Pencernaan & Imun</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-3">Jamu Kunyit Asam Segar</h3>
+                        <p class="text-xs text-slate-500 italic mt-1">Menggunakan Kunyit Rimpang & Asam Jawa</p>
+
+                        <div class="mt-4 space-y-2 text-sm text-slate-600">
+                            <div class="font-semibold text-slate-800">Bahan Utama:</div>
+                            <ul class="list-disc list-inside space-y-1 text-xs">
+                                100g Kunyit segar (parut/blender)
+                                50g Asam Jawa
+                                100g Gula Aren asli
+                                1/2 sdt Garam & 500ml Air
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="openRecipeModal('kunyit-asam')" class="w-full py-2.5 rounded-xl bg-toga-50 hover:bg-toga-100 text-toga-800 font-semibold text-xs transition flex items-center justify-center gap-2">
+                            <span>Lihat Cara Pembuatan</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recipe Card 3 -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-pink-100 text-pink-700 flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-wine-glass"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-pink-600 bg-pink-50 px-3 py-1 rounded-full">Antioksidan Tinggi</span>
+                        <h3 class="text-xl font-bold text-slate-900 mt-3">Teh Bunga Rosella Merah</h3>
+                        <p class="text-xs text-slate-500 italic mt-1">Menggunakan Kelopak Bunga Rosella Kering/Segar</p>
+
+                        <div class="mt-4 space-y-2 text-sm text-slate-600">
+                            <div class="font-semibold text-slate-800">Bahan Utama:</div>
+                            <ul class="list-disc list-inside space-y-1 text-xs">
+                                3-5 kelopak Bunga Rosella
+                                300ml Air Panas mendidih
+                                Madu murni secukupnya
+                                Es batu (opsional untuk versi dingin)
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="openRecipeModal('teh-rosella')" class="w-full py-2.5 rounded-xl bg-toga-50 hover:bg-toga-100 text-toga-800 font-semibold text-xs transition flex items-center justify-center gap-2">
+                            <span>Lihat Cara Pembuatan</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section id="kegiatan" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-toga-600 font-bold uppercase tracking-wider text-xs sm:text-sm bg-toga-50 px-4 py-1.5 rounded-full border border-toga-200">
+                        Kegiatan Lingkungan
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                        Dokumentasi Warga RT.06 RW.12
+                    </h2>
+                </div>
+                <p class="text-slate-600 mt-2 md:mt-0 text-sm max-w-md">
+                    Inisiatif rutin Dasawisma dan Pemuda RT.06 dalam perawat, pemanenan, dan workshop pemanfaatan tanaman herbal.
+                </p>
+            </div>
+
+            <!-- Activity Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Activity 1 -->
+                <div class="group rounded-3xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm hover:shadow-lg transition">
+                    <div class="h-48 bg-toga-800 relative overflow-hidden flex items-center justify-center text-toga-300">
+                        <i class="fa-solid fa-people-roof text-5xl group-hover:scale-110 transition duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">
+                            12 Mei 2026
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-900 text-base group-hover:text-toga-600 transition">Kerja Bakti Penanaman Bibit Jahe Merah</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Penambahan 50 polibag bibit baru bersama seluruh warga RT 06.</p>
+                    </div>
+                </div>
+
+                <!-- Activity 2 -->
+                <div class="group rounded-3xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm hover:shadow-lg transition">
+                    <div class="h-48 bg-amber-800 relative overflow-hidden flex items-center justify-center text-amber-300">
+                        <i class="fa-solid fa-mortar-pestle text-5xl group-hover:scale-110 transition duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">
+                            28 Juni 2026
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-900 text-base group-hover:text-toga-600 transition">Pelatihan Pembuatan Jamu Tradisional</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Ibu-ibu KWT & Dasawisma mempraktikkan olahan kunyit asam berkualitas.</p>
+                    </div>
+                </div>
+
+                <!-- Activity 3 -->
+                <div class="group rounded-3xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm hover:shadow-lg transition">
+                    <div class="h-48 bg-emerald-900 relative overflow-hidden flex items-center justify-center text-emerald-300">
+                        <i class="fa-solid fa-qrcode text-5xl group-hover:scale-110 transition duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">
+                            15 Juli 2026
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-900 text-base group-hover:text-toga-600 transition">Pemasangan Plang Barcode QR Info</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Pemuda RT memasang QR code di setiap bedeng tanaman untuk kemudahan pengunjung.</p>
+                    </div>
+                </div>
+
+                <!-- Activity 4 -->
+                <div class="group rounded-3xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm hover:shadow-lg transition">
+                    <div class="h-48 bg-teal-900 relative overflow-hidden flex items-center justify-center text-teal-300">
+                        <i class="fa-solid fa-award text-5xl group-hover:scale-110 transition duration-300"></i>
+                        <span class="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">
+                            02 Agustus 2026
+                        </span>
+                    </div>
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-900 text-base group-hover:text-toga-600 transition">Panen Bersama & Pembagian Bibit Gratis</h4>
+                        <p class="text-slate-500 text-xs mt-2 leading-relaxed">Pembagian stum bibit sirih & lidah buaya bagi seluruh keluarga RT 06.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section id="galeri" class="py-20 bg-gradient-to-b from-slate-50 via-toga-50/30 to-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="text-toga-700 font-bold uppercase tracking-wider text-xs sm:text-sm bg-toga-100 px-4 py-1.5 rounded-full border border-toga-300">
+                        Dokumentasi Visual
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+                        Galeri Foto Taman & Kegiatan Warga
+                    </h2>
+                    <p class="text-slate-600 mt-2 text-sm sm:text-base max-w-xl">
+                        Kumpulan momen indah, keasrian tanaman, dan gotong royong RT.06 RW.12. Anda juga dapat mengunggah foto Anda sendiri!
+                    </p>
+                </div>
+
+                <!-- Upload Photo Button -->
+                <button onclick="openUploadModal()" class="px-6 py-3.5 rounded-2xl bg-toga-600 hover:bg-toga-700 text-white font-bold text-sm shadow-lg shadow-toga-600/30 transition flex items-center gap-2.5 self-start md:self-auto">
+                    <i class="fa-solid fa-cloud-arrow-up text-lg"></i>
+                    <span>Unggah Foto Manual</span>
+                </button>
+            </div>
+
+            <!-- Gallery Filter Buttons -->
+            <div class="flex flex-wrap items-center gap-2 mb-8 bg-white p-2.5 rounded-2xl border border-slate-200 shadow-sm">
+                <button class="gallery-cat-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-toga-600 text-white transition" data-gallery-cat="all">Semua Foto</button>
+                <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-gallery-cat="kegiatan">Kegiatan Warga</button>
+                <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-gallery-cat="tanaman">Koleksi Tanaman</button>
+                <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-gallery-cat="suasana">Suasana Taman</button>
+                <button class="gallery-cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-gallery-cat="unggahan">Foto Unggahan Warga</button>
+            </div>
+
+            <!-- Photo Grid -->
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Dynamic gallery cards populated via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Guestbook Contact Section -->
+    <section id="kontak" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Info & Address Left -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-toga-400 font-bold uppercase tracking-wider text-xs bg-toga-950 px-4 py-1.5 rounded-full border border-toga-800">
+                        Kunjungi Taman Kami
+                    </span>
+                    <h2 class="text-3xl font-extrabold tracking-tight">Lokasi Taman TOGA RT.06 RW.12</h2>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Taman ini terbuka untuk kunjungan edukasi warga perumahan, studi banding Dasawisma, maupun umum.
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-toga-800/80 text-toga-400 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Alamat Lengkap</h4>
+                                <p class="text-xs text-slate-400 mt-1">Area Fasum RT.06 RW.12 Perumahan Ambarawa Asri, Jawa Tengah</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-toga-800/80 text-toga-400 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Jam Kunjungan Terbuka</h4>
+                                <p class="text-xs text-slate-400 mt-1">Setiap Hari: 06.00 - 17.30 WIB</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-toga-800/80 text-toga-400 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Kontak / Telepon / WhatsApp</h4>
+                                <p class="text-xs text-slate-400 mt-1">
+                                    <a href="https://wa.me/081393864380" target="_blank" class="text-toga-400 hover:underline inline-flex items-center gap-1.5 font-semibold">
+                                        <i class="fa-brands fa-whatsapp text-sm"></i> 0813-9386-4380
+                                    </a>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-xl bg-toga-800/80 text-toga-400 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-white">Pengurus Lingkungan RT.06 / RW.12</h4>
+                                <div class="text-xs text-slate-300 mt-1.5 space-y-1">
+                                    <p class="flex items-center gap-2"><i class="fa-solid fa-user-tie text-toga-400 w-4"></i><span><strong>Ketua RT 06:</strong> Bapak Suharno</span></p>
+                                    <p class="flex items-center gap-2"><i class="fa-solid fa-user-nurse text-toga-400 w-4"></i><span><strong>Ketua PKK:</strong> Ibu Rustiana</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!-- Guestbook Form Right -->
+                <div class="lg:col-span-7 bg-slate-800/90 backdrop-blur-md p-8 rounded-3xl border border-slate-700 shadow-2xl">
+                    <h3 class="text-xl font-bold text-white mb-2">Buku Tamu & Permohonan Bibit</h3>
+                    <p class="text-xs text-slate-400 mb-6">Tinggalkan pesan, saran, atau ajukan permintaan stek bibit herbal tanaman obat.</p>
+
+                    <form id="guestbook-form" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                                <input type="text" required placeholder="Contoh: Bpk. Sugeng" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-toga-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor WhatsApp / HP</label>
+                                <input type="tel" required placeholder="0812xxxxxxx" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-toga-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Keperluan / Pesan</label>
+                            <textarea rows="3" required placeholder="Tuliskan pesan atau bibit tanaman TOGA yang ingin diminta..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-toga-500"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-toga-600 hover:bg-toga-500 text-white font-bold text-sm shadow-lg shadow-toga-600/30 transition">
+                            Kirim Pesan Ke Pengurus
+                        </button>
+                    </form>
+
+                    <!-- Alert Box -->
+                    <div id="form-alert" class="hidden mt-4 p-4 rounded-xl bg-toga-900/90 border border-toga-500 text-toga-200 text-xs flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-toga-400 text-lg"></i>
+                        <span>Terima kasih! Pesan Anda telah terkirim kepada Pengurus Taman TOGA RT.06 RW.12.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-toga-600 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div>
+                        <span class="block text-base font-bold text-white">Taman TOGA Ambarawa Asri</span>
+                        <span class="text-xs text-slate-500">RT.06 RW.12 • Lingkungan Hijau & Mandiri Kesehatan</span>
+                    </div>
+                </div>
+
+                <div class="text-xs text-slate-500">
+                    &copy; 2026 Taman TOGA RT 06 / RW 12. Di bawah naungan Ketua RT Bapak Suharno & Ketua PKK Ibu Rustiana.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Plant Detail Modal Dialog -->
+    <div id="plant-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl p-6 sm:p-8 relative border border-slate-100">
+            <button onclick="closePlantModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div id="modal-content">
+                <!-- Dynamic Modal Content populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Recipe Detail Modal -->
+    <div id="recipe-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl max-w-xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="closeRecipeModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div id="recipe-modal-content">
+                <!-- Recipe detail content populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Upload Modal -->
+    <div id="upload-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/75 backdrop-blur-md transition-all">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100">
+            <button onclick="closeUploadModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs font-bold text-toga-700 bg-toga-100 px-3 py-1 rounded-full">Tambah Dokumentasi Baru</span>
+                <h3 class="text-2xl font-black text-slate-900 mt-2">Unggah Foto Ke Galeri</h3>
+                <p class="text-xs text-slate-500 mt-1">Pilih foto dari perangkat Anda dan berikan judul serta deskripsi singkat.</p>
+            </div>
+
+            <form id="upload-photo-form" class="space-y-4">
+                <!-- Drag and Drop / File Input Box -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Pilih File Foto (JPG, PNG, WebP)</label>
+                    <div id="drop-zone" class="border-2 border-dashed border-toga-300 hover:border-toga-500 bg-toga-50/50 rounded-2xl p-5 text-center cursor-pointer transition relative">
+                        <input type="file" id="photo-file-input" accept="image/*" required class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleFileSelect(event)">
+                        
+                        <div id="upload-preview-container" class="hidden">
+                            <img id="upload-preview-img" src="" alt="Preview Foto" class="max-h-40 mx-auto rounded-xl object-cover shadow-md mb-2 border border-slate-200">
+                            <span id="upload-file-name" class="block text-xs font-bold text-toga-800 truncate"></span>
+                            <span class="text-[10px] text-slate-400">Klik atau seret untuk mengganti foto</span>
+                        </div>
+
+                        <div id="upload-placeholder">
+                            <div class="w-12 h-12 rounded-full bg-toga-100 text-toga-600 flex items-center justify-center mx-auto mb-2 text-xl">
+                                <i class="fa-solid fa-images"></i>
+                            </div>
+                            <p class="text-xs font-bold text-slate-700">Klik di sini atau seret foto ke dalam kotak</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Mendukung format gambar hingga 10 MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Title Input -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Judul / Keterangan Foto</label>
+                    <input type="text" id="photo-title-input" required placeholder="Contoh: Panen Kunyit Dasawisma RT 06" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-toga-500">
+                </div>
+
+                <!-- Category Selector -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Kategori</label>
+                        <select id="photo-category-input" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-toga-500">
+                            <option value="kegiatan">Kegiatan Warga</option>
+                            <option value="tanaman">Koleksi Tanaman</option>
+                            <option value="suasana">Suasana Taman</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Pengunggah</label>
+                        <input type="text" id="photo-uploader-input" placeholder="Nama Anda (opsional)" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 placeholder-slate-400 text-xs focus:outline-none focus:ring-2 focus:ring-toga-500">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full py-3 rounded-xl bg-toga-600 hover:bg-toga-700 text-white font-bold text-xs shadow-lg shadow-toga-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Tambahkan Foto Ke Galeri</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal Viewer -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/90 backdrop-blur-md transition-opacity" onclick="closeLightboxModal(event)">
+        <div class="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightboxModal()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <img id="lightbox-img" src="" alt="Detail Foto" class="max-h-[75vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-white/20">
+            <div class="mt-4 text-center text-white">
+                <h4 id="lightbox-title" class="text-xl font-bold"></h4>
+                <p id="lightbox-meta" class="text-xs text-toga-300 mt-1"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic & Three.js 3D Setup -->
+    <script>
+        
+        // Data Katalog Tanaman Obat TOGA RT.06 RW.12
+        const plantsData = [
+            {
+                id: 'jahe-merah',
+                name: 'Jahe Merah',
+                latin: 'Zingiber officinale var. rubrum',
+                category: 'rimpang',
+                icon: 'fa-pepper-hot',
+                color: 'from-amber-600 to-red-600',
+                benefit: 'Meningkatkan daya tahan tubuh, meredakan nyeri sendi, & penghangat badan alami.',
+                description: 'Jahe merah memiliki kandungan minyak atsiri dan gingerol paling tinggi dibandingkan jenis jahe biasa. Tumbuh subur di Zona A Taman TOGA RT 06.',
+                howToGrow: 'Ditanam pada tanah gembur bercampur kompos. Membutuhkan sinar matahari cukup dan penyiraman rutin 1x sehari.',
+                usage: 'Geprak 2 rimpang, rebus dengan 300ml air selama 10 menit, campur dengan madu murni.'
+            },
+            {
+                id: 'kunyit',
+                name: 'Kunyit / Kunir',
+                latin: 'Curcuma longa',
+                category: 'rimpang',
+                icon: 'fa-stroopwafel',
+                color: 'from-amber-500 to-yellow-600',
+                benefit: 'Anti-inflamasi kuat, menyehatkan lambung, & pelancar pencernaan.',
+                description: 'Kunyit merupakan tanaman obat rimpang utama yang paling banyak dipanen oleh Dasawisma RT 06 untuk jamu kunyit asam.',
+                howToGrow: 'Cocok di tempat yang agak teduh dengan drainase air yang baik agar rimpang tidak membusuk.',
+                usage: 'Parut kunyit segar, peras airnya, tambahkan air asam jawa dan gula merah hangat.'
+            },
+            {
+                id: 'temulawak',
+                name: 'Temulawak',
+                latin: 'Curcuma zanthorrhiza',
+                category: 'rimpang',
+                icon: 'fa-cubes-stacked',
+                color: 'from-yellow-600 to-amber-700',
+                benefit: 'Menjaga fungsi hati (hepatoprotektor) & menambah nafsu makan anak.',
+                description: 'Khas tanaman obat Indonesia dengan kandungan kurkuminoid tinggi. Menjadi ikon zona rimpang RT.06 RW.12.',
+                howToGrow: 'Ditanam menggunakan potongan rimpang tua di bedeng tanah organik.',
+                usage: 'Iris tipis rimpang temulawak, keringkan/rebus segar bersama gula batu.'
+            },
+            {
+                id: 'sirih-hijau',
+                name: 'Sirih Hijau',
+                latin: 'Piper betle',
+                category: 'daun',
+                icon: 'fa-leaf',
+                color: 'from-toga-500 to-emerald-700',
+                benefit: 'Antiseptik alami, merawat kesehatan mulut/gigi, & menghentikan mimisan.',
+                description: 'Tanaman merambat yang tumbuh di tiang bambu area Zona B. Daunnya kaya akan zat pembersih bakteri alami.',
+                howToGrow: 'Diperbanyak dengan stek batang. Membutuhkan rambatan dan lokasi teduh berbasah sedang.',
+                usage: 'Rebus 5 lembar daun sirih untuk pembersih mulut alami atau kompres antiseptik.'
+            },
+            {
+                id: 'lidah-buaya',
+                name: 'Lidah Buaya (Aloe Vera)',
+                latin: 'Aloe barbadensis miller',
+                category: 'daun',
+                icon: 'fa-plant-wilt',
+                color: 'from-emerald-500 to-teal-700',
+                benefit: 'Penyembuh luka bakar ringan, pelembab kulit, & penyejuk pencernaan.',
+                description: 'Ditanam pada pot-pot khusus di sekitar saung edukasi. Daging gelnya sangat tebal dan segar.',
+                howToGrow: 'Sangat mudah dirawat, membutuhkan tanah berpasir ringan dan tidak boleh terlalu banyak air.',
+                usage: 'Kupas kulit luar, cuci bersih lendirnya, potong dadu untuk campuran es buah/minuman herbal.'
+            },
+            {
+                id: 'kumis-kucing',
+                name: 'Kumis Kucing',
+                latin: 'Orthosiphon aristatus',
+                category: 'daun',
+                icon: 'fa-spa',
+                color: 'from-teal-600 to-cyan-800',
+                benefit: 'Peluruh batu ginjal, melancarkan buang air kecil, & penurun darah tinggi.',
+                description: 'Bunga putih cantiknya menyerupai kumis kucing. Sangat populer sebagai ramuan teh herbal peluruh.',
+                howToGrow: 'Ditanam dari stek batang, membutuhkan sinar matahari penuh agar berbunga lebat.',
+                usage: 'Seduh 10 lembar daun kering kumis kucing dengan air panas mendidih selama 15 menit.'
+            },
+            {
+                id: 'rosella',
+                name: 'Bunga Rosella',
+                latin: 'Hibiscus sabdariffa',
+                category: 'bunga',
+                icon: 'fa-florian-cross',
+                color: 'from-rose-600 to-pink-700',
+                benefit: 'Kaya Vitamin C, antioksidan tinggi, & membantu menurunkan tekanan darah.',
+                description: 'Kelopak bunga berwarna merah menyala di Zona D Taman TOGA. Bunga ini dipanen rutin untuk bahan teh.',
+                howToGrow: 'Ditanam dari biji. Tumbuh tegak hingga 1.5 meter dengan paparan sinar matahari langsung.',
+                usage: 'Seduh 3-4 kelopak rosella kering dengan air panas, tambahkan madu secukupnya.'
+            },
+            {
+                id: 'kencur',
+                name: 'Kencur',
+                latin: 'Kaempferia galanga',
+                category: 'rimpang',
+                icon: 'fa-seedling',
+                color: 'from-amber-700 to-stone-700',
+                benefit: 'Meredakan batuk berdahak, pegal linu, & bahan beras kencur.',
+                description: 'Tanaman rimpang berdaun melebar mendatar di atas tanah. Sangat harum dan khas aroma organiknya.',
+                howToGrow: 'Menyukai tanah humus gembur dan tempat yang terhindar dari terik panas terik berlebih.',
+                usage: 'Tumbuk kencur bersama beras rendaman untuk membuat herbal Beras Kencur segar.'
+            },
+            {
+                id: 'daun-mint',
+                name: 'Daun Mint / Mint',
+                latin: 'Mentha arvensis',
+                category: 'daun',
+                icon: 'fa-wind',
+                color: 'from-green-400 to-emerald-600',
+                benefit: 'Meringankan sesak napas, menyegarkan tenggorokan, & mengatasi mual.',
+                description: 'Aroma mentholnya menyegarkan area Zona B. Sangat cepat berkembang biak jika tanah lembab.',
+                howToGrow: 'Mudah tumbuh lewat tunas merayap. Penyiraman teratur pagi dan sore.',
+                usage: 'Remas 4 lembar daun mint segar lalu masukkan ke dalam teh hangat atau infused water.'
+            }
+        ];
+
+        function renderPlantGrid(items) {
+            const grid = document.getElementById('plant-grid');
+            grid.innerHTML = '';
+
+            if(items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-500">
+                        <i class="fa-solid fa-seedling text-4xl mb-3 text-slate-300"></i>
+                        <p class="font-semibold">Tanaman tidak ditemukan</p>
+                        <p class="text-xs">Coba kata kunci pencarian lain.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(plant => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300 flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${plant.color} text-white flex items-center justify-center text-xl shadow-md">
+                                <i class="fa-solid ${plant.icon}"></i>
+                            </div>
+                            <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 bg-toga-100 text-toga-800 rounded-full border border-toga-200">
+                                ${plant.category}
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 group-hover:text-toga-600 transition">${plant.name}</h3>
+                        <p class="text-xs text-slate-400 italic font-medium mb-3">${plant.latin}</p>
+                        <p class="text-slate-600 text-xs leading-relaxed line-clamp-3 mb-4">${plant.benefit}</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[11px] font-medium text-slate-400">Ambarawa Asri RT.06</span>
+                        <button onclick="openPlantModal('${plant.id}')" class="px-4 py-2 rounded-xl bg-toga-600 hover:bg-toga-700 text-white text-xs font-semibold transition shadow-sm flex items-center gap-1.5">
+                            <span>Detail</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize plant grid
+        renderPlantGrid(plantsData);
+
+        // Search & Filter listeners
+        const searchInput = document.getElementById('plant-search');
+        const catFilterBtns = document.querySelectorAll('.cat-btn');
+
+        let currentCat = 'all';
+
+        function filterPlants() {
+            const query = searchInput.value.toLowerCase().trim();
+            const filtered = plantsData.filter(plant => {
+                const matchesCat = (currentCat === 'all' || plant.category === currentCat);
+                const matchesQuery = plant.name.toLowerCase().includes(query) || 
+                                     plant.latin.toLowerCase().includes(query) ||
+                                     plant.benefit.toLowerCase().includes(query);
+                return matchesCat && matchesQuery;
+            });
+            renderPlantGrid(filtered);
+        }
+
+        searchInput.addEventListener('input', filterPlants);
+
+        catFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catFilterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-toga-600', 'text-white');
+                    b.classList.add('bg-white', 'text-slate-700');
+                });
+                btn.classList.add('active', 'bg-toga-600', 'text-white');
+                btn.classList.remove('bg-white', 'text-slate-700');
+                currentCat = btn.getAttribute('data-cat');
+                filterPlants();
+            });
+        });
+
+        function openPlantModal(plantId) {
+            const plant = plantsData.find(p => p.id === plantId);
+            if (!plant) return;
+
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = `
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${plant.color} text-white flex items-center justify-center text-3xl shadow-lg">
+                        <i class="fa-solid ${plant.icon}"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-toga-600 bg-toga-50 px-3 py-1 rounded-full">
+                            Kategori: ${plant.category}
+                        </span>
+                        <h3 class="text-2xl font-black text-slate-900 mt-1">${plant.name}</h3>
+                        <p class="text-sm text-slate-500 italic">${plant.latin}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="bg-toga-50 p-4 rounded-2xl border border-toga-200">
+                        <h4 class="font-bold text-toga-900 text-sm mb-1 flex items-center gap-2">
+                            <i class="fa-solid fa-heart-pulse text-toga-600"></i>
+                            Khasiat Utama Bagi Kesehatan
+                        </h4>
+                        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed">${plant.benefit}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-sm mb-1">Deskripsi Tanaman</h4>
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">${plant.description}</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h5 class="font-bold text-xs text-slate-800 mb-1 flex items-center gap-1.5">
+                                <i class="fa-solid fa-seedling text-toga-600"></i> Cara Penanaman & Perawatan
+                            </h5>
+                            <p class="text-slate-600 text-xs leading-relaxed">${plant.howToGrow}</p>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h5 class="font-bold text-xs text-slate-800 mb-1 flex items-center gap-1.5">
+                                <i class="fa-solid fa-mortar-pestle text-amber-600"></i> Petunjuk Penggunaan
+                            </h5>
+                            <p class="text-slate-600 text-xs leading-relaxed">${plant.usage}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('plant-modal').classList.remove('hidden');
+        }
+
+        function closePlantModal() {
+            document.getElementById('plant-modal').classList.add('hidden');
+        }
+
+        const zonesInfo = {
+            rimpang: {
+                badge: "ZONA A - RIMPANG & AKAR",
+                title: "Area Koleksi Rimpang Alami",
+                desc: "Zona A didedikasikan untuk tanaman rimpang obat pilihan seperti Jahe Merah, Kunyit, Temulawak, dan Kencur. Rimpang dipanen berkala oleh tim Dasawisma RT.06 RW.12.",
+                items: ["Bedeng dengan kompos murni organik", "12 varietas tanaman rimpang", "Sistem drainase tanah gembur"]
+            },
+            daun: {
+                badge: "ZONA B - DAUN & HERBA",
+                title: "Area Tanaman Daun & Herbal Merambat",
+                desc: "Zona B diisi koleksi daun obat berkhasiat tinggi seperti Sirih Hijau, Lidah Buaya, Kumis Kucing, dan Mint. Dilengkapi tiang rambat bambu alami.",
+                items: ["Rambatan bambu ramah lingkungan", "Penyiraman kabut pemicu daun lebat", "Paling diminati untuk pembedahan bibit"]
+            },
+            kompos: {
+                badge: "ZONA C - KOMPOS & PERSEMAIAN",
+                title: "Pusat Daur Ulang & Bibit Gratis",
+                desc: "Zona pengolahan sampah organik warga RT 06 menjadi pupuk kompos kaya nutrisi serta tempat pembibitan stek tanaman baru.",
+                items: ["2 Unit tong komposter takakura", "Area pembagian bibit polibag gratis", "Edukasi daur ulang sampah dapur"]
+            },
+            bunga: {
+                badge: "ZONA D - BUNGA & BUAH HERBAL",
+                title: "Area Bunga & Buah Khasiat",
+                desc: "Menampilkan tanaman obat berbunga dan berbuah seperti Rosella Merah, Mahkota Dewa, dan Jeruk Nipis yang mempercantik estetika taman.",
+                items: ["Spot foto hijau ramah keluarga", "Paling lebat saat musim kemarau-penghujan", "Bahan utama teh herbal warna alami"]
+            },
+            gazebo: {
+                badge: "SAUNG EDUKASI RT 06",
+                title: "Gazebo Pertemuan & Pos Edukasi",
+                desc: "Saung kayu tempat berkumpul pengurus RT, edukasi anak-anak mengenai tanaman herbal, dan pengolahan racikan jamu bersama.",
+                items: ["Fasilitas duduk kayu & papan informasi QR", "Tempat diskusi rutin Dasawisma", "Area pameran hasil racikan herbal"]
+            }
+        };
+
+        function selectZone(zoneKey) {
+            const data = zonesInfo[zoneKey];
+            if (!data) return;
+
+            document.getElementById('zone-badge').innerText = data.badge;
+            document.getElementById('zone-title').innerText = data.title;
+            document.getElementById('zone-desc').innerText = data.desc;
+
+            const listContainer = document.getElementById('zone-details-list');
+            listContainer.innerHTML = '';
+            data.items.forEach(item => {
+                listContainer.innerHTML += `
+                    <div class="flex items-center gap-3 text-sm text-slate-300">
+                        <i class="fa-solid fa-circle-check text-toga-400"></i>
+                        <span>${item}</span>
+                    </div>
+                `;
+            });
+        }
+
+        function switchMapTab(tab) {
+            const tabDenah = document.getElementById('map-tab-denah');
+            const tabLokasi = document.getElementById('map-tab-lokasi');
+            const btnDenah = document.getElementById('tab-btn-denah');
+            const btnLokasi = document.getElementById('tab-btn-lokasi');
+
+            if (tab === 'denah') {
+                tabDenah.classList.remove('hidden');
+                tabLokasi.classList.add('hidden');
+
+                btnDenah.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-toga-600 text-white shadow-md";
+                btnLokasi.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-700";
+            } else {
+                tabDenah.classList.add('hidden');
+                tabLokasi.classList.remove('hidden');
+
+                btnLokasi.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 bg-toga-600 text-white shadow-md";
+                btnDenah.className = "px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 text-slate-400 hover:text-white hover:bg-slate-700";
+            }
+        }
+
+        const recipesData = {
+            'wedang-jahe': {
+                title: 'Wedang Jahe Merah Sereh',
+                category: 'Minuman Penghangat',
+                steps: [
+                    'Cuci bersih 2 rimpang jahe merah dan 2 batang serai.',
+                    'Geprak jahe dan memarkan bagian putih batang serai.',
+                    'Rebus dalam 500ml air bersih bersama 1 lembar daun pandan selama 10-15 menit.',
+                    'Tuang ke cangkir, tambahkan gula aren cair atau 2 sendok makan madu murni.',
+                    'Nikmati selagi hangat untuk meredakan masuk angin dan rasa pegal.'
+                ]
+            },
+            'kunyit-asam': {
+                title: 'Jamu Kunyit Asam Segar',
+                category: 'Penyegar & Imun',
+                steps: [
+                    'Kupas dan parut/blender 100 gram kunyit segar.',
+                    'Rebus kunyit halus dalam 600ml air bersama 50g asam jawa dan 100g gula merah.',
+                    'Tambahkan sedikit sejumput garam dapur.',
+                    'Saring ampasnya menggunakan kain penyaring halus.',
+                    'Sajikan hangat atau simpan di kulkas untuk dinikmati dingin.'
+                ]
+            },
+            'teh-rosella': {
+                title: 'Teh Kelopak Bunga Rosella',
+                category: 'Teh Herbal Antioksidan',
+                steps: [
+                    'Petik 4-5 kelopak bunga rosella segar dari Zona D (atau kelopak kering).',
+                    'Cuci bersih kelopak dengan air mengalir.',
+                    'Seduh dengan 300ml air mendidih dalam cangkir hingga air berwarna merah marun jernih.',
+                    'Tambahkan madu murni atau gula batu sesuai selera manis Anda.',
+                    'Siap diminum hangat untuk menjaga daya tahan tubuh.'
+                ]
+            }
+        };
+
+        function openRecipeModal(key) {
+            const r = recipesData[key];
+            if (!r) return;
+
+            const content = document.getElementById('recipe-modal-content');
+            content.innerHTML = `
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-full">${r.category}</span>
+                    <h3 class="text-2xl font-black text-slate-900 mt-2">${r.title}</h3>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-bold text-sm text-slate-800">Langkah-Langkah Pembuatan:</h4>
+                    <ol class="space-y-2 text-xs sm:text-sm text-slate-600 list-decimal list-inside">
+                        ${r.steps.map(step => `<li class="leading-relaxed">${step}</li>`).join('')}
+                    </ol>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
+                    <button onclick="closeRecipeModal()" class="px-5 py-2.5 rounded-xl bg-toga-600 text-white font-semibold text-xs hover:bg-toga-700 transition">
+                        Tutup Resep
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('recipe-modal').classList.remove('hidden');
+        }
+
+        function closeRecipeModal() {
+            document.getElementById('recipe-modal').classList.add('hidden');
+        }
+
+        // Data Galeri Foto Dokumentasi Taman TOGA
+        const galleryData = [
+            
+            {
+                id: 'gal-1',
+                title: 'Tangkal Naon Yeuh?',
+                category: 'tanaman',
+                categoryName: 'Koleksi Tanaman',
+                uploader: 'Pengurus RT 06',
+                date: '15 Agt 2026',
+                url: 'https://i.ibb.co.com/vCYv4HB4/photo-2026-10-15-20-46-45.jpg'
+            },
+                        {
+                id: 'gal-2',
+                title: 'Saung Edukasi',
+                category: 'suasana',
+                categoryName: 'Suasana Taman',
+                uploader: 'Dasawisma RT 06',
+                date: '15 Oct 2026',
+                url: 'https://i.ibb.co.com/pj4vvg55/photo-2026-10-15-20-46-54.jpg'
+            },
+            {
+                id: 'gal-2',
+                title: 'Saung Edukasi',
+                category: 'suasana',
+                categoryName: 'Suasana Taman',
+                uploader: 'Dasawisma RT 06',
+                date: '15 Oct 2026',
+                url: 'https://i.ibb.co.com/wFMpW6wb/photo-2026-10-15-20-46-51.jpg'
+            },
+                        {
+                id: 'gal-3',
+                title: 'Pemantauan Taman Toga Oleh Pak RT',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'Bpk. Suharno',
+                date: '08 Agustus 2026',
+                url: "https://i.ibb.co.com/g1hz1mX/photo-2026-10-13-19-27-16.jpg"            
+            },
+            {
+                id: 'gal-3',
+                title: 'Pemantauan Taman Toga Oleh Pak RT',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'Bpk. Suharno',
+                date: '08 Agustus 2026',
+                url: "https://i.ibb.co.com/xqtTdfX6/photo-2026-10-13-19-27-09.jpg"            
+            },
+            {
+                id: 'gal-4',
+                title: 'Panen Kelopak Rosella Merah',
+                category: 'tanaman',
+                categoryName: 'Koleksi Tanaman',
+                uploader: 'Ibu Rustiana',
+                date: '20 Mei 2026',
+                url: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'gal-5',
+                title: 'Persemaian Bibit Sirih & Mint',
+                category: 'tanaman',
+                categoryName: 'Koleksi Tanaman',
+                uploader: 'Pemuda RT 06',
+                date: '14 Juni 2026',
+                url: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80'
+            },
+            {
+                id: 'gal-6',
+                title: 'Penilaian Perlombaan Taman Toga Antar RT',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'Tim PKK RW 12',
+                date: '09 Agustus 2026',
+                url: "https://i.ibb.co.com/v4TTXhJr/photo-2026-10-13-19-27-20.jpg",
+            },
+            {
+                id: 'gal-6',
+                title: 'Pembuatan Pot Taman Berbahan Limbah Plastik Oleh Ibu-ibu',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'WARGA RT. 06',
+                date: '16 Oktober 2026',
+                url: "https://i.ibb.co.com/hP0p5tf/photo-2026-10-17-12-53-36.jpg"
+            },
+            {
+                id: 'gal-6',
+                title: 'Proses Penanaman Beserta Pupuk Kedalam Pot',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'WARGA RT. 06',
+                date: '17 Oktober 2026',
+                url: "https://i.ibb.co.com/1YzxCPhV/photo-2026-10-17-17-06-39.jpg"
+            },
+            {
+                id: 'gal-6',
+                title: 'Proses Pengecoran Kolam Ikan',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'WARGA RT. 06',
+                date: '17 Oktober 2026',
+                url: "https://i.ibb.co.com/yjF5gR6/photo-2026-10-17-19-32-50.jpg.jpg"
+            },
+            {
+                id: 'gal-6',
+                title: 'Proses Pengecoran Kolam Ikan',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'WARGA RT. 06',
+                date: '17 Oktober 2026',
+                url: "https://i.ibb.co.com/QFfCFvWm/photo-2026-10-17-19-32-53.jpg"
+            },
+            {
+                id: 'gal-6',
+                title: 'Pengecatan Pot Taman',
+                category: 'kegiatan',
+                categoryName: 'Kegiatan Warga',
+                uploader: 'WARGA RT. 06',
+                date: '16 Oktober 2026',
+                url: "https://i.ibb.co.com/NddLvB7x/photo-2026-10-17-12-53-46.jpg",
+            }
+            
+        ];
+
+        let currentGalleryFilter = 'all';
+
+        function renderGallery(items) {
+            const grid = document.getElementById('gallery-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            const filtered = items.filter(item => {
+                if (currentGalleryFilter === 'all') return true;
+                if (currentGalleryFilter === 'unggahan') return item.isUserUploaded === true;
+                return item.category === currentGalleryFilter;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-500 bg-white rounded-3xl border border-slate-200">
+                        <i class="fa-solid fa-camera-retro text-4xl mb-3 text-slate-300"></i>
+                        <p class="font-bold text-slate-700 text-sm">Belum ada foto pada kategori ini</p>
+                        <p class="text-xs text-slate-400 mt-1">Klik tombol "Unggah Foto Manual" untuk menambahkan foto pertama Anda!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'group relative rounded-3xl overflow-hidden bg-white border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col';
+                card.onclick = () => openLightbox(item.url, item.title, `${item.categoryName} • ${item.uploader} (${item.date})`);
+
+                card.innerHTML = `
+                    <div class="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                        <img src="${item.url}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.src='https://placehold.co/600x400/16a34a/ffffff?text=Taman+TOGA+RT06'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <span class="text-xs text-white font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-magnifying-glass-plus text-toga-400"></i>
+                                Perbesar Foto
+                            </span>
+                        </div>
+                        ${item.isUserUploaded ? `<span class="absolute top-3 right-3 bg-toga-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md"><i class="fa-solid fa-user-check mr-1"></i>Unggahan Warga</span>` : ''}
+                    </div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-toga-700 bg-toga-50 px-2.5 py-0.5 rounded-md border border-toga-200 inline-block mb-1.5">
+                                ${item.categoryName}
+                            </span>
+                            <h4 class="font-bold text-slate-900 text-sm group-hover:text-toga-600 transition line-clamp-2">${item.title}</h4>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+                            <span><i class="fa-regular fa-user mr-1"></i>${item.uploader}</span>
+                            <span><i class="fa-regular fa-calendar mr-1"></i>${item.date}</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Initialize Gallery
+        renderGallery(galleryData);
+
+        // Filter Buttons Logic
+        document.querySelectorAll('.gallery-cat-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.gallery-cat-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-toga-600', 'text-white');
+                    b.classList.add('bg-white', 'text-slate-700');
+                });
+                btn.classList.add('active', 'bg-toga-600', 'text-white');
+                btn.classList.remove('bg-white', 'text-slate-700');
+                currentGalleryFilter = btn.getAttribute('data-gallery-cat');
+                renderGallery(galleryData);
+            });
+        });
+
+        // Lightbox Functions
+        function openLightbox(url, title, meta) {
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox-title').innerText = title;
+            document.getElementById('lightbox-meta').innerText = meta;
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeLightboxModal(e) {
+            if (!e || e.target.id === 'lightbox-modal' || e.target.closest('button')) {
+                document.getElementById('lightbox-modal').classList.add('hidden');
+            }
+        }
+
+        // Upload Modal Functions
+        function openUploadModal() {
+            document.getElementById('upload-modal').classList.remove('hidden');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('upload-modal').classList.add('hidden');
+            resetUploadForm();
+        }
+
+        let selectedFileUrl = null;
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            selectedFileUrl = URL.createObjectURL(file);
+            document.getElementById('upload-preview-img').src = selectedFileUrl;
+            document.getElementById('upload-file-name').innerText = file.name;
+            document.getElementById('upload-preview-container').classList.remove('hidden');
+            document.getElementById('upload-placeholder').classList.add('hidden');
+        }
+
+        function resetUploadForm() {
+            document.getElementById('upload-photo-form').reset();
+            document.getElementById('upload-preview-container').classList.add('hidden');
+            document.getElementById('upload-placeholder').classList.remove('hidden');
+            selectedFileUrl = null;
+        }
+
+        // Handle Photo Form Submission
+        document.getElementById('upload-photo-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('photo-title-input').value.trim();
+            const category = document.getElementById('photo-category-input').value;
+            const uploader = document.getElementById('photo-uploader-input').value.trim() || 'Warga RT 06';
+            
+            if (!selectedFileUrl) {
+                showToastNotification("Silakan pilih file foto terlebih dahulu!");
+                return;
+            }
+
+            const categoryNames = {
+                'kegiatan': 'Kegiatan Warga',
+                'tanaman': 'Koleksi Tanaman',
+                'suasana': 'Suasana Taman'
+            };
+
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+
+            const newPhoto = {
+                id: 'gal-user-' + Date.now(),
+                title: title,
+                category: category,
+                categoryName: categoryNames[category] || 'Unggahan Warga',
+                uploader: uploader,
+                date: formattedDate,
+                url: selectedFileUrl,
+                isUserUploaded: true
+            };
+
+            galleryData.unshift(newPhoto);
+            renderGallery(galleryData);
+            closeUploadModal();
+            showToastNotification("Foto Anda berhasil ditambahkan ke Galeri!");
+        });
+
+        function changeMapEmbed(type) {
+            const iframe = document.getElementById('gmap-iframe');
+            const btnStd = document.getElementById('btn-map-std');
+            const btnSat = document.getElementById('btn-map-sat');
+            if (!iframe) return;
+
+            if (type === 'satellite') {
+                iframe.src = "https://maps.google.com/maps?q=Perumahan+Ambarawa+Asri,+Bawen,+Semarang&t=k&z=17&ie=UTF8&iwloc=&output=embed";
+                btnSat.className = "px-3 py-1.5 rounded-lg bg-toga-600 text-white font-semibold transition";
+                btnStd.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold transition";
+            } else {
+                iframe.src = "https://maps.google.com/maps?q=Perumahan+Ambarawa+Asri,+Bawen,+Semarang&t=&z=17&ie=UTF8&iwloc=&output=embed";
+                btnStd.className = "px-3 py-1.5 rounded-lg bg-toga-600 text-white font-semibold transition";
+                btnSat.className = "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white font-semibold transition";
+            }
+        }
+
+        function copyLocationCoords() {
+            const textToCopy = "-7.246111, 110.422722 (Perumahan Ambarawa Asri RT 06 RW 12, Bawen, Kab. Semarang)";
+            
+            function fallbackCopy() {
+                const textarea = document.createElement("textarea");
+                textarea.value = textToCopy;
+                textarea.style.position = "fixed";
+                textarea.style.opacity = "0";
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showToastNotification("Koordinat lokasi presisi berhasil disalin!");
+                } catch (err) {
+                    showToastNotification("Gagal menyalin koordinat.");
+                }
+                document.body.removeChild(textarea);
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    showToastNotification("Koordinat lokasi presisi berhasil disalin!");
+                }).catch(() => {
+                    // Fallback when Clipboard API is blocked by Permissions Policy in sandboxed environments
+                    fallbackCopy();
+                });
+            } else {
+                fallbackCopy();
+            }
+        }
+
+        function showToastNotification(message) {
+            let toast = document.getElementById('custom-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'custom-toast';
+                toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-slate-900 text-white border border-toga-500 shadow-2xl text-xs font-semibold flex items-center gap-2.5 transition-all duration-300 transform translate-y-10 opacity-0 pointer-events-none';
+                document.body.appendChild(toast);
+            }
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-toga-400 text-base"></i><span>${message}</span>`;
+            toast.classList.remove('translate-y-10', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-10', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Guestbook Form Handler
+        document.getElementById('guestbook-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('form-alert').classList.remove('hidden');
+            this.reset();
+            setTimeout(() => {
+                document.getElementById('form-alert').classList.add('hidden');
+            }, 6000);
+        });
+
+        // Mobile Nav Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Three.js 3D Herbal Plant Pot & Floating Leaf Scene
+        window.addEventListener('load', () => {
+            init3DScene();
+        });
+
+        let scene, camera, renderer, plantGroup, leaves = [];
+
+        function init3DScene() {
+            const container = document.getElementById('hero-3d-canvas');
+            if(!container) return;
+
+            const width = container.clientWidth || 400;
+            const height = container.clientHeight || 400;
+
+            // 1. Scene setup
+            scene = new THREE.Scene();
+
+            // 2. Camera setup
+            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.set(0, 3, 7);
+
+            // 3. Renderer setup
+            renderer = new THREE.WebGLRenderer({ canvas: container, antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+
+            // 4. Lighting setup
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0x4ade80, 1.2);
+            dirLight.position.set(5, 10, 7);
+            dirLight.castShadow = true;
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0xf59e0b, 1, 10);
+            pointLight.position.set(-3, 2, 2);
+            scene.add(pointLight);
+
+            // 5. Build 3D Plant Model Group
+            plantGroup = new THREE.Group();
+
+            // Pot Base (Ceramic Pot)
+            const potGeo = new THREE.CylinderGeometry(1.2, 0.8, 1.5, 32);
+            const potMat = new THREE.MeshStandardMaterial({
+                color: 0xd97706,
+                roughness: 0.4,
+                metalness: 0.1
+            });
+            const pot = new THREE.Mesh(potGeo, potMat);
+            pot.position.y = 0.75;
+            pot.castShadow = true;
+            pot.receiveShadow = true;
+            plantGroup.add(pot);
+
+            // Soil Surface
+            const soilGeo = new THREE.CylinderGeometry(1.18, 1.18, 0.1, 32);
+            const soilMat = new THREE.MeshStandardMaterial({ color: 0x3f2e21, roughness: 0.9 });
+            const soil = new THREE.Mesh(soilGeo, soilMat);
+            soil.position.y = 1.48;
+            plantGroup.add(soil);
+
+            // Stems & Leaves (Stylized Herbal Plant)
+            const stemMat = new THREE.MeshStandardMaterial({ color: 0x15803d, roughness: 0.5 });
+            const leafMat = new THREE.MeshStandardMaterial({
+                color: 0x22c55e,
+                roughness: 0.3,
+                side: THREE.DoubleSide
+            });
+
+            // Main central stem
+            const stemGeo = new THREE.CylinderGeometry(0.06, 0.09, 2.2, 16);
+            const mainStem = new THREE.Mesh(stemGeo, stemMat);
+            mainStem.position.y = 2.5;
+            plantGroup.add(mainStem);
+
+            // Leaf Geometry creation
+            const leafShape = new THREE.Shape();
+            leafShape.moveTo(0, 0);
+            leafShape.quadraticCurveTo(0.4, 0.5, 0, 1.2);
+            leafShape.quadraticCurveTo(-0.4, 0.5, 0, 0);
+
+            const leafGeo = new THREE.ShapeGeometry(leafShape);
+
+            // Branch & attach leaves around stem
+            const numLeaves = 12;
+            for (let i = 0; i < numLeaves; i++) {
+                const leafMesh = new THREE.Mesh(leafGeo, leafMat);
+                const angle = (i / numLeaves) * Math.PI * 4;
+                const heightY = 1.6 + (i * 0.15);
+
+                leafMesh.position.set(0, heightY, 0);
+                leafMesh.rotation.y = angle;
+                leafMesh.rotation.x = 0.4 + Math.sin(i) * 0.2;
+                leafMesh.rotation.z = -0.3;
+                leafMesh.scale.set(0.7, 0.7, 0.7);
+
+                plantGroup.add(leafMesh);
+            }
+
+            // Floating particles / leaves around scene
+            for (let i = 0; i < 15; i++) {
+                const pLeaf = new THREE.Mesh(leafGeo, new THREE.MeshStandardMaterial({
+                    color: 0x86efac,
+                    transparent: true,
+                    opacity: 0.85
+                }));
+                pLeaf.position.set(
+                    (Math.random() - 0.5) * 6,
+                    Math.random() * 4 + 1,
+                    (Math.random() - 0.5) * 6
+                );
+                pLeaf.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+                pLeaf.scale.set(0.3, 0.3, 0.3);
+                scene.add(pLeaf);
+                leaves.push({
+                    mesh: pLeaf,
+                    speedY: 0.005 + Math.random() * 0.008,
+                    rotSpeed: 0.01 + Math.random() * 0.02
+                });
+            }
+
+            scene.add(plantGroup);
+
+            // OrbitControls
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.enableZoom = true;
+            controls.maxPolarAngle = Math.PI / 2 + 0.1;
+            controls.minDistance = 3;
+            controls.maxDistance = 10;
+
+            // Reset camera button
+            const resetBtn = document.getElementById('reset-3d-btn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    camera.position.set(0, 3, 7);
+                    controls.target.set(0, 1.5, 0);
+                    controls.update();
+                });
+            }
+
+            controls.target.set(0, 1.5, 0);
+            controls.update();
+
+            // Resize handle
+            window.addEventListener('resize', () => {
+                const w = container.parentElement.clientWidth;
+                const h = container.parentElement.clientHeight;
+                camera.aspect = w / h;
+                camera.updateProjectionMatrix();
+                renderer.setSize(w, h);
+            });
+
+            // Animation Loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // Gentle plant rotation
+                plantGroup.rotation.y += 0.006;
+
+                // Animate floating leaves
+                leaves.forEach(item => {
+                    item.mesh.position.y -= item.speedY;
+                    item.mesh.rotation.y += item.rotSpeed;
+                    item.mesh.rotation.x += item.rotSpeed * 0.5;
+
+                    if (item.mesh.position.y < 0) {
+                        item.mesh.position.y = 5;
+                    }
+                });
+
+                controls.update();
+                renderer.render(scene, camera);
+            }
+
+            animate();
+        }
+    </script>
+</body>
+</html>
+<!-- Section Kontak Taman TOGA -->
+<section id="kontak" class="contact-section">
+  <div class="contact-container">
+    <h2>Hubungi Pengelola Taman TOGA</h2>
+    <p class="subtitle">RT.06 / RW.12 Perumahan Ambarawa Asri, Bawen</p>
+
+    <div class="contact-grid">
+      <!-- Info Kontak & WhatsApp -->
+      <div class="contact-info">
+        <h3>Informasi Kontak</h3>
+        <p><strong>Koordinator:</strong> Bapak/Ibu Pengelola TOGA</p>
+        <p><strong>WhatsApp:</strong> 0813-9386-4380</p>
+        <p><strong>Alamat:</strong> Jalan Mutiara Utara No. 276, RT.06 / RW.12 Ambarawa Asri, Bawen, Kab. Semarang</p>
+        
+        <a href="https://wa.me/6281393864380" class="btn-wa" target="_blank">
+          Chat Via WhatsApp
+        </a>
+      </div>
+
+      <!-- Foto / Gambar Barcode (QR Code) -->
+      <div class="contact-barcode">
+        <h3>Scan QR WhatsApp</h3>
+        <p>Scan menggunakan kamera HP untuk langsung terhubung:</p>
+        
+        <div class="qr-card">
+          <!-- QR Code otomatis mengarah ke nomor WhatsApp baru -->
+          <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/6281393864380&color=2e7d32" 
+            alt="QR Code WhatsApp Taman TOGA" 
+            class="qr-image"
+          />
+        </div>
+        <small>Klik/Scan untuk kirim pesan cepat</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Styling Tampilan (CSS) -->
+<style>
+  .contact-section {
+    padding: 40px 20px;
+    background-color: #f4f8f5;
+    font-family: Arial, sans-serif;
+  }
+  .contact-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+  }
+  .contact-info, .contact-barcode {
+    flex: 1;
+    min-width: 280px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .contact-info h3, .contact-barcode h3 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+  }
+  .btn-wa {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+  }
+  .qr-card {
+    margin: 15px 0;
+  }
+  .qr-image {
+    width: 180px;
+    height: 180px;
+    border: 3px solid #2e7d32;
+    border-radius: 8px;
+    padding: 5px;
+  }
+  
+</style>
