@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <!-- Halaman akan refresh otomatis setiap 5 detik -->
+    <meta http-equiv="refresh" content="180">
+    <title>Auto Refresh Halaman</title>
+</head>
+<body>
+    <h1>Halaman ini akan memuat ulang setiap 5 detik.</h1>
+</body>
+</html>
+
+<!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -276,7 +288,7 @@
                     <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto" id="category-filters">
                         <button class="cat-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-toga-600 text-white shadow-sm transition" data-cat="all">Semua</button>
                         <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="rimpang">Rimpang / Akar</button>
-                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="daun">Daun & Herba</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="daun">Daun & Herbal</button>
                         <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="bunga">Bunga & Buah</button>
                     </div>
                 </div>
@@ -300,7 +312,7 @@
                 <span class="text-toga-400 font-bold uppercase tracking-wider text-xs sm:text-sm bg-toga-950 px-4 py-1.5 rounded-full border border-toga-800 flex items-center justify-center gap-2 w-max mx-auto">
                     <i class="fa-solid fa-map-location-dot text-toga-400"></i>
                     Denah 3D & Google Maps Lokasi
-                </span>
+                </span>temu lawak$0temulawak
                 <h2 class="text-3xl sm:text-4xl font-extrabold mt-3 tracking-tight">
                     Denah Interaktif & Peta Google Maps Taman TOGA
                 </h2>
@@ -652,7 +664,7 @@
                         Kegiatan Lingkungan
                     </span>
                     <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
-                        Dokumentasi Warga RT.06 RW.12
+                        Video & Dokumentasi Warga RT.06 RW.12
                     </h2>
                 </div>
                 <p class="text-slate-600 mt-2 md:mt-0 text-sm max-w-md">
@@ -662,6 +674,18 @@
 
             <!-- Activity Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Activity 1 -->
+                <iframe width="357" height="250" src="https://www.youtube.com/embed/yqKa6VrUsvo?si=Jl86cj2x4o2pXZob" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                <!-- Activity 1 -->
+                <iframe width="357" height="250" src="https://www.youtube.com/embed/-MI09eDPz7A?si=8EEg0DLLZIMwQM8_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                <!-- Activity 1 -->
+                <iframe width="357" height="250" src="https://www.youtube.com/embed/4DMXbsxpvV8?si=skvZ11GEuwVpMNl_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                <!-- Activity 1 -->
+                <iframe width="357" height="250" src="https://www.youtube.com/embed/gxxX0cGXpKg?si=RCImgj4DEYqYJ8K-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
                 <!-- Activity 1 -->
                 <div class="group rounded-3xl overflow-hidden bg-slate-50 border border-slate-200 shadow-sm hover:shadow-lg transition">
                     <div class="h-48 bg-toga-800 relative overflow-hidden flex items-center justify-center text-toga-300">
@@ -1022,6 +1046,18 @@
                 usage: 'Parut kunyit segar, peras airnya, tambahkan air asam jawa dan gula merah hangat.'
             },
             {
+                id: 'SECANG',
+                name: 'Secang',
+                latin: 'Biancaea sappan',
+                category: 'rimpang',
+                icon: 'fa-wind',
+                color: 'from-yellow-500 to-amber-700',
+                benefit: 'Ekstrak kayu secang berkhasiat untuk mengobati beberapa penyakit seperti Diare, Sifilis, Darah kotor, Berak darah, Malaria, Tumor, Penawar racun, Pengobatan sesudah persalinan, Katarak, Maag, Masuk angin dan Kelelahan.',
+                description: 'Secang merupakan tumbuhan semak atau perdu yang kayunya dapat mulai dipanen sejak umur 1-2 tahun.',
+                howToGrow: 'Budidaya kayu secang terbilang cukup mudah karena tanaman ini merupakan jenis perdu tropis yang tahan banting dan bisa tumbuh di berbagai kondisi.',
+                usage: 'Ekstrak cair kayu secang dapat dibalurkan pada bagian tubuh yang luka, serta dapat mengobati penyakit tulang keropos (osteoporosis).'
+            },
+            {
                 id: 'temulawak',
                 name: 'Temulawak',
                 latin: 'Curcuma zanthorrhiza',
@@ -1044,6 +1080,30 @@
                 description: 'Tanaman merambat yang tumbuh di tiang bambu area Zona B. Daunnya kaya akan zat pembersih bakteri alami.',
                 howToGrow: 'Diperbanyak dengan stek batang. Membutuhkan rambatan dan lokasi teduh berbasah sedang.',
                 usage: 'Rebus 5 lembar daun sirih untuk pembersih mulut alami atau kompres antiseptik.'
+            },
+            {
+                id: 'Sambung-Nyawa',
+                name: 'Sambung Nyawa',
+                latin: 'Gynura procumbens',
+                category: 'daun',
+                icon: 'fa-leaf',
+                color: 'from-toga-500 to-emerald-500',
+                benefit: 'Mengobati diabetes melitus, Mengobati darah tinggi, Mengobati radang pita tenggorokan dan sinusitis, Mengobati tumor, Mengobati liver, Mengobati ambiein, Mengobati kolestrol tinggi, Mengobati maag dan Terkena bisa ulat dan semut hitam ',
+                description: 'Tanaman herbal menahun dari famili Asteraceae (suku kenikir-kenikiran) yang sering dimanfaatkan sebagai tanaman obat maupun lalapan segar.',
+                howToGrow: 'Menanam sambung nyawa paling mudah dilakukan melalui stek batang. Pilih batang yang sehat, potong sepanjang 15–20 cm, lalu tancapkan langsung ke media tanam berupa campuran tanah subur dan pupuk kandang. Letakkan di tempat teduh dan siram secara rutin 1–2 kali sehari.',
+                usage: 'Contoh untuk mengobati darah tinggi caranya adalah: Gunakan 7 lembar daun sambung nyawa. Cuci bersih kemudian dimakan sehari sekali sebagai lalapan. Bisa juga ditumis atau dikukus sebentar sebelum dimakan atau dibuat jus. Lakukan hal ini dengan rutin. '
+            },
+            {
+                id: 'Dandang-Gendis',
+                name: 'Dandang Gendis / Daun Madu',
+                latin: 'Clinacanthus nutans',
+                category: 'daun',
+                icon: 'fa-leaf',
+                color: 'from-toga-500 to-emerald-700',
+                benefit: 'Biasanya digunakan untuk mengobati Diabetes dan Disentri',
+                description: 'Dandang Gendis adalah tanaman semak berjenis perdu dari famili Acanthaceae yang banyak dimanfaatkan sebagai tanaman obat tradisional di Asia Tenggara, termasuk Indonesia, Malaysia, dan Thailand. Nama "dandang" berarti wadah dan "gendis" berarti gula dalam bahasa Jawa, mengacu pada rasa daunnya yang agak manis',
+                howToGrow: 'Pilih batang dandang gendis yang sehat, tegak, sudah agak berkayu, serta berasal dari tanaman induk yang bebas hama. Kemudian  Potong batang sepanjang 10–20 cm dengan gunting tanaman yang steril. Buat potongan miring (sekitar 45 derajat) di bagian bawah agar area tumbuh akar lebih luas. ',
+                usage: 'Cara untuk mengobati diabetes, Ambil 7 lembar (untuk sakit ringan) atau 21 lembar (untuk sakit berat) daun dandang gendis. Cuci bersih dan rebus dengan 2 gelas air, tunggu hingga air menjadi 1 gelas, setelah dingin disaring. Minum 2 kali sehari selama 14 hari.'
             },
             {
                 id: 'BINAHONG',
@@ -1315,7 +1375,7 @@
                 items: ["Bedeng dengan kompos murni organik", "12 varietas tanaman rimpang", "Sistem drainase tanah gembur"]
             },
             daun: {
-                badge: "ZONA B - DAUN & HERBA",
+                badge: "ZONA B - DAUN & HERBAL",
                 title: "Area Tanaman Daun & Herbal Merambat",
                 desc: "Zona B diisi koleksi daun obat berkhasiat tinggi seperti Sirih Hijau, Lidah Buaya, Kumis Kucing, dan Mint. Dilengkapi tiang rambat bambu alami.",
                 items: ["Rambatan bambu ramah lingkungan", "Penyiraman kabut pemicu daun lebat", "Paling diminati untuk pembedahan bibit"]
