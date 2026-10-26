@@ -2,7 +2,7 @@
 <html>
 <head>
     <!-- Halaman akan refresh otomatis setiap 5 detik -->
-    <meta http-equiv="refresh" content="180">
+    <meta http-equiv="refresh" content="360">
     <title>Auto Refresh Halaman</title>
 </head>
 <body>
@@ -289,7 +289,8 @@
                         <button class="cat-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-toga-600 text-white shadow-sm transition" data-cat="all">Semua</button>
                         <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="rimpang">Rimpang / Akar</button>
                         <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="daun">Daun & Herbal</button>
-                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="bunga">Bunga & Buah</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="bunga">Bunga</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-700 hover:bg-toga-50 border border-slate-200 transition" data-cat="buah">Buah</button>
                     </div>
                 </div>
             </div>
@@ -1070,6 +1071,18 @@
                 usage: 'Iris tipis rimpang temulawak, keringkan/rebus segar bersama gula batu.'
             },
             {
+                id: 'Daun-Pandan',
+                name: 'Daun Pandan',
+                latin: 'Pandanus amaryllifolius',
+                category: 'daun',
+                icon: 'fa-wind',
+                color: 'from-green-400 to-emerald-600',
+                benefit: 'Membantu meredakan nyeri sendi, menurunkan tekanan darah tinggi, mengatasi kram perut, dan mengurangi kecemasan berkat aroma menenangkannya.',
+                description: 'Terna hijau abadi yang tumbuh bergerombol, daunnya beraroma wangi khas, berbentuk pita panjang meruncing, dan tersusun secara roset spiral.',
+                howToGrow: 'Ditanam dari anakkan (tunas samping) di tanah yang lembap dan kaya bahan organik. Tanaman ini menyukai area setengah teduh dan butuh penyiraman yang cukup agar tanah tidak kering.',
+                usage: 'Rebus 5 lembar daun sirih untuk pembersih mulut alami atau kompres antiseptik.'
+            },
+            {
                 id: 'sirih-hijau',
                 name: 'Sirih Hijau',
                 latin: 'Piper betle',
@@ -1202,28 +1215,28 @@
                 usage: 'Seduh 3-4 kelopak rosella kering dengan air panas, tambahkan madu secukupnya.'
             },
             {
-                id: 'Kembang-Sepatu',
-                name: 'Kembang Sepatu',
-                latin: 'Hibiscus rosasinensis',
-                category: 'bunga',
-                icon: 'fa-florian-cross',
-                color: 'from-rose-600 to-pink-700',
-                benefit: ' Bagian bunga, daun, dan akarnya berkhasiat sebagai penurun panas (vebrifuga).',
-                description: 'Bunga sepatu atau kembang sepatu adalah tanaman semak dari famili Malvaceae yang berasal dari Asia Timur dan populer sebagai tanaman hias di wilayah tropis dan subtropis.',
-                howToGrow: 'Menanam bunga sepatu paling mudah menggunakan metode stek batang. Pilih batang yang kokoh sepanjang 20–30 cm, siapkan media tanam dari campuran tanah, sekam, dan kompos, lalu letakkan tanaman di tempat panas yang terkena sinar matahari agar cepat berbunga lebat.',
-                usage: 'Cuci bersih kelopak bunga kembang sepatu, rebus dengan 3 gelas air hingga airnya menyusut menjadi sekitar 1,5 gelas kemudian Angkat, saring, dan biarkan hingga hangat. Minum air seduhan atau rebusan ini sebanyak 2 hingga 3 kali sehari. '
-            },
-            {
-                id: 'Mawar',
-                name: 'Bunga Mawar',
-                latin: 'Rosa hybrida',
+                id: 'KEMUNING',
+                name: 'Kemuning',
+                latin: 'Murraya paniculata',
                 category: 'bunga',
                 icon: 'fa-spa',
+                color: 'from-green-400 to-cyan-800',
+                benefit: 'Membantu melancarkan haid yang tidak teratur, meredakan nyeri rematik, serta menghaluskan kulit tubuh (sebagai bahan lulur tradisional).',
+                description: 'Semak perdu bercabang banyak dengan daun kecil majemuk menyirip berwarna hijau mengkilap, menghasilkan bunga putih kecil yang beraroma sangat harum semerbak.',
+                howToGrow: 'Daun atau akarnya direbus untuk diminum airnya guna meredakan nyeri haid atau rematik. Daunnya juga bisa ditumbuk untuk masker/lulur.',
+                usage: 'Cuci bersih kelopak bunga kembang sepatu, rebus dengan 3 gelas air hingga airnya menyusut menjadi sekitar 1,5 gelas kemudian Angkat, saring, dan biarkan hingga hangat. '
+            },
+            {
+                id: 'Jambu-Merah',
+                name: 'Jambu Merah',
+                latin: 'Psidium guajava',
+                category: 'buah',
+                icon: 'fa-spa',
                 color: 'from-rose-600 to-pink-700',
-                benefit: 'Digunakan untuk membantu meredakan batuk darah, keputihan, serta melancarkan haid yang tidak teratur.',
-                description: 'Bunga mawar adalah tanaman semak berkayu dari genus Rosa yang terkenal karena kecantikan, warna yang beragam, dan aroma yang harum.',
-                howToGrow: 'Cara menanam bunga mawar dapat dilakukan melalui metode stek batang atau pemindahan bibit ke dalam pot.',
-                usage: 'Meracik bunga mawar untuk herbal paling umum dilakukan dengan membuat teh herbal kelopak mawar. Pastikan menggunakan bunga mawar yang bebas dari pestisida atau dari hasil penanaman organik.'
+                benefit: 'Membantu mempercepat penyembuhan demam berdarah (meningkatkan trombosit), melancarkan pencernaan, dan kaya akan antioksidan serta vitamin C untuk daya tahan tubuh.',
+                description: 'Pohon buah berkayu sedang dengan batang licin berwarna kecokelatan, daun berbentuk lonjong dengan tulang daun yang jelas, serta buah berdaging merah dengan banyak biji kecil di dalamnya.',
+                howToGrow: 'Tanam dari bibit cangkok atau biji di lubang berukuran 50x50 cm yang diberi pupuk kandang. Lakukan penyiraman secara rutin setiap hari dan pemangkasan ranting secara berkala agar pertumbuhan buah lebih optimal.',
+                usage: 'Buah dikonsumsi langsung atau dibuat jus segar. Untuk diare, rebus beberapa lembar daun mudanya lalu minum air rebusannya.'
             },
             {
                 id: 'Melati',
@@ -2406,3 +2419,175 @@
   }
   
 </style>
+
+<!-- Section Rating Bintang Pembaca -->
+<section id="rating-section" class="rating-container">
+  <div class="rating-card">
+    <h3>Beri Rating untuk Website Ini</h3>
+    <p>Bagaimana pengalaman Anda menjelajahi website Taman TOGA?</p>
+    
+    <!-- Pilihan Bintang Interaktif -->
+    <div class="stars" id="starContainer">
+      <span class="star" data-value="1">&#9733;</span>
+      <span class="star" data-value="2">&#9733;</span>
+      <span class="star" data-value="3">&#9733;</span>
+      <span class="star" data-value="4">&#9733;</span>
+      <span class="star" data-value="5">&#9733;</span>
+    </div>
+
+    <p id="ratingMessage" class="rating-message">Klik bintang untuk memberi nilai</p>
+    
+    <!-- Statistik Penilaian -->
+    <div class="rating-stats">
+      <span id="averageRating">0.0</span> / 5 
+      (<span id="totalVotes">0</span> total suara)
+    </div>
+  </div>
+</section>
+
+<!-- Styling Tampilan Rating (CSS) -->
+<style>
+  .rating-container {
+    padding: 30px 20px;
+    background-color: #f4f8f5;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  .rating-card {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .rating-card h3 {
+    color: #2e7d32;
+    margin-bottom: 8px;
+  }
+  .rating-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+  }
+  .stars {
+    font-size: 36px;
+    color: #ccc;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: inline-flex;
+    gap: 5px;
+  }
+  .stars .star.active,
+  .stars .star:hover,
+  .stars .star:hover ~ .star {
+    color: #ffc107; /* Warna kuning emas */
+  }
+  /* Memperbaiki arah hover bintang */
+  .stars:hover .star {
+    color: #ffc107;
+  }
+  .stars .star:hover ~ .star {
+    color: #ccc;
+  }
+  .rating-message {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  .rating-stats {
+    font-size: 14px;
+    color: #555;
+    background: #f9f9f9;
+    padding: 8px;
+    border-radius: 6px;
+    display: inline-block;
+  }
+</style>
+
+<!-- Script Interaktif Rating & Penyimpanan Lokal (JavaScript) -->
+<script>
+  const stars = document.querySelectorAll('#starContainer .star');
+  const ratingMessage = document.getElementById('ratingMessage');
+  const averageRatingEl = document.getElementById('averageRating');
+  const totalVotesEl = document.getElementById('totalVotes');
+
+  // Ambil data rating yang tersimpan di browser (LocalStorage) atau buat baru
+  let totalScore = localStorage.getItem('toga_total_score') ? parseInt(localStorage.getItem('toga_total_score')) : 0;
+  let totalVotes = localStorage.getItem('toga_total_votes') ? parseInt(localStorage.getItem('toga_total_votes')) : 0;
+  let userHasVoted = localStorage.getItem('toga_has_voted') === 'true';
+
+  // Tampilkan nilai awal
+  updateStats();
+
+  if (userHasVoted) {
+    ratingMessage.innerText = "Terima kasih! Anda sudah memberikan penilaian.";
+    disableStars();
+  }
+
+  stars.forEach((star, index1) => {
+    // Efek hover interaktif
+    star.addEventListener("mouseover", () => {
+      if (!userHasVoted) {
+        stars.forEach((star2, index2) => {
+          if (index2 <= index1) {
+            star2.style.color = "#ffc107";
+          } else {
+            star2.style.color = "#ccc";
+          }
+        });
+      }
+    });
+
+    star.addEventListener("mouseout", () => {
+      if (!userHasVoted) {
+        resetStarsColor();
+      }
+    });
+
+    // Saat bintang diklik
+    star.addEventListener("click", () => {
+      if (userHasVoted) return;
+
+      const ratingValue = parseInt(star.getAttribute("data-value"));
+      
+      // Tambahkan ke total suara
+      totalScore += ratingValue;
+      totalVotes += 1;
+      userHasVoted = true;
+
+      // Simpan ke LocalStorage browser pengunjung
+      localStorage.setItem('toga_total_score', totalScore);
+      localStorage.setItem('toga_total_votes', totalVotes);
+      localStorage.setItem('toga_has_voted', 'true');
+
+      ratingMessage.innerText = `Terima kasih! Anda memberi rating ${ratingValue} Bintang.`;
+      disableStars();
+      updateStats();
+    });
+  });
+
+  function resetStarsColor() {
+    stars.forEach(star => {
+      star.style.color = "#ccc";
+    });
+  }
+
+  function disableStars() {
+    const starContainer = document.getElementById('starContainer');
+    starContainer.style.pointerEvents = 'none';
+    starContainer.style.opacity = '0.8';
+  }
+
+  function updateStats() {
+    if (totalVotes > 0) {
+      const avg = (totalScore / totalVotes).toFixed(1);
+      averageRatingEl.innerText = avg;
+      totalVotesEl.innerText = totalVotes;
+    } else {
+      averageRatingEl.innerText = "0.0";
+      totalVotesEl.innerText = "0";
+    }
+  }
+</script>
